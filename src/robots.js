@@ -7,9 +7,9 @@ export const robots = [
   },
   {
     id: 2,
-    name: 'Ervin Howell',
-    username: 'Antonette',
-    email: 'Shanna@melissa.tv'
+    name: 'Xavier Arce',
+    username: 'Xavier',
+    email: 'xaviarcea@7meses.com'
   },
   {
     id: 3,
@@ -58,5 +58,11 @@ export const robots = [
     name: 'Clementina DuBuque',
     username: 'Moriah.Stanton',
     email: 'Rey.Padberg@karina.biz'
-  }
+  },
+  {
+    id: 11,
+    name: 'Sthefany Apolo',
+    username: 'Reina de mi Corazon',
+    email: 'sthefanymireinaApolo@7meses.com'
+  },
 ];
