@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Saiyan Sans';
+    src: url('Saiyan-Sans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+h1 {
+    font-family: 'Saiyan Sans', sans-serif;
+    font-weight: 200;
+    color: gold;
+}
+  
