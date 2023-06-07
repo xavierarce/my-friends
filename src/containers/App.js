@@ -1,8 +1,9 @@
 import React, { Component } from "react"
-import Cardlist from "./Cardlist";
-import Searchbox from "./Searchbox";
+import Cardlist from "../components/Cardlist";
+import Searchbox from "../components/Searchbox";
 import './App.css'
-import { robots } from "./robots";
+import { robots } from "../robots";
+import Scroll from "../components/Scroll"
 
 
 
@@ -24,7 +25,6 @@ class App extends Component {
             });
     }
 
-
     onSearchChange = (event) => {
         this.setState({searchfield: event.target.value})
     }    
@@ -40,7 +40,9 @@ class App extends Component {
                 <div className="tc">
                     <h1 className="f1">Robofriends</h1>
                     <Searchbox searchChange={this.onSearchChange}/>
-                    <Cardlist robots={filteredRobots}/>
+                    <Scroll>
+                        <Cardlist robots={filteredRobots}/>
+                    </Scroll>
                 </div>
             );
         };
