@@ -1,52 +1,59 @@
-import React, { Component } from "react"
-import Cardlist from "../components/Cardlist";
-import Searchbox from "../components/Searchbox";
-import './App.css'
+import { Component } from 'react';
+
+import './App.css';
+import CardList from '../components/Cardlist/Cardlist';
+import SearchBox from '../components/Searchbox/Searchbox';
+import Scroll from '../components/Scroll/Scroll';
 import { robots } from "../robots";
-import Scroll from "../components/Scroll"
 
 
+class App extends Component{
+  constructor(){
+    super();
 
-class App extends Component {
-    constructor(){
-        super()
-        this.state = {
-            robots : [],
-            searchfield : ''
-        }
+    this.state={
+      monsters:[],
+      searchInput:''
     }
+  }
 
-    componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => {
-                const allRobots = [...users, ...robots];
-                this.setState({ robots: allRobots });
-            });
-    }
+  componentDidMount(){
+    console.log('component didmount')
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then((res)=>res.json())
+    .then(users=>this.setState(()=>{
+        const allRobots = [...users, ...robots];
+        return {monsters:allRobots} 
+      })
+    )
 
-    onSearchChange = (event) => {
-        this.setState({searchfield: event.target.value})
-    }    
+  }
 
-    render(){
-        const filteredRobots = this.state.robots.filter(robot =>{
-            return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
-        })
-        if(this.state.robots.length===0){
-            return <h1 className="tc"> Loaiding </h1>
-        } else{
-            return(
-                <div className="tc">
-                    <h1 className="f1">Robofriends</h1>
-                    <Searchbox searchChange={this.onSearchChange}/>
-                    <Scroll>
-                        <Cardlist robots={filteredRobots}/>
-                    </Scroll>
-                </div>
-            );
-        };
-    }; 
+  onSearchChange = (event) =>{
+    this.setState({searchInput:event.target.value})
+  }; 
+
+  render(){
+    const {monsters,searchInput} = this.state;
+    const {onSearchChange} = this;
+
+    let filteredMonsters = monsters.filter((monster)=>{
+      return monster.name.toLowerCase().includes(searchInput.toLowerCase())
+    });
+
+    return (
+      <div className="App">
+        <h1 className="app-title">Monsters Box</h1>
+        <SearchBox 
+          className='monsters-search-box' 
+          onSearchChange={onSearchChange} 
+          placeholder='Search Monsters'/>
+        <Scroll>
+          <CardList className="display"  filteredMonsters={filteredMonsters} />
+        </Scroll>
+      </div>
+    );
+  }
 }
 
-export default App 
+export default App;
